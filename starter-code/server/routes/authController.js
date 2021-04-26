@@ -55,16 +55,21 @@ authController.post("/login", (req, res, next) => {
     if (!user) { return res.status(401).json(info); }
 
     req.login(user, (err) => {
-      if (err) { return res.status(500).json({ message: "Something went wrong" }); }
-      return res.status(200).json(req.user);
+      if (err) {
+        return res.status(500).json({ message: "Something went wrong" })
+      };
+      console.log("req.user logeado es: ",req.user);
+      res.status(200).json(req.user); //quito el return
     });
   })(req, res, next);
 });
 
+
+
 authController.post("/logout", (req, res) => {
   console.log("in logout");
   req.logout();
-  res.status(200).json({ message: "Success" });
+  return res.status(200).json({ message: "Success" });
 });
 
 authController.get("/loggedin", (req, res) => {

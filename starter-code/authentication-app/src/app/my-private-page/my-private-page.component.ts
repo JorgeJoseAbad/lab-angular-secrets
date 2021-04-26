@@ -18,7 +18,6 @@ export class MyPrivatePageComponent implements OnInit {
   constructor(private session: SessionService,private router: Router) { }
 
   ngOnInit() {
-
     this.session.isLoggedIn()
       .subscribe(
         (user) =>{
@@ -29,7 +28,7 @@ export class MyPrivatePageComponent implements OnInit {
           this.errorCb(err)
           this.router.navigate([''])
         });
-        //this.username = this.session.user.name,
+        //this.username = this.session.user.username,
         //this.secret   = this.session.user.secret;
         //console.log(this.username);
         //console.log(this.secret);
@@ -51,5 +50,10 @@ export class MyPrivatePageComponent implements OnInit {
   successCb(user) {
     this.user = user;
     this.error = null;
+  }
+
+  logout(){
+    this.session.logout()
+      .subscribe(res=>console.log(res.json()))
   }
 }

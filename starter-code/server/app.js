@@ -9,17 +9,37 @@ const authController = require("./routes/authController");
 const session        = require("express-session");
 const passport       = require("passport");
 
-const app            = express();
-
-// Passport configuration
-require("./config/passport")(passport);
 
 // Mongoose configuration
 const mongoose = require("mongoose");
+
 mongoose.connect("mongodb://localhost/angular-authentication",{
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+// Passport configuration
+mongoose.Promise=global.Promise;
+
+const passportSetup = require('./config/passport');
+passportSetup(passport);
+
+const app            = express();
+
+const whitelist = [
+    'http://localhost:4200',
+];
+
+const corsOptions = {
+    origin: function(origin, callback){
+        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        callback(null, originIsWhitelisted);
+    },
+    credentials: true
+};
+
+//app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // Session
 app.use(session({
@@ -31,16 +51,19 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors());
-app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 // uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', authController);
+
 app.all('/*', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });

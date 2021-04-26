@@ -8,7 +8,7 @@ import { Router} from '@angular/router';
   styleUrls: ['./auth-login.component.css']
 })
 export class AuthLoginComponent implements OnInit {
-  user: any;
+  user: Object={};
   formInfo={
     username:'',
     password:''
@@ -27,14 +27,14 @@ export class AuthLoginComponent implements OnInit {
 
 
   login(){
-          debugger;
+
     console.log("login");
     this.session.login(this.formInfo)
       .subscribe(
         (user)=>{
           console.log("USER ES: ", user);
-          this.successCb(user)
-          this.router.navigate([''])
+          this.successCb(user);
+          this.router.navigate(['']);
         },
         (err)=>this.errorCb(err)
       )

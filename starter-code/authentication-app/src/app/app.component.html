@@ -1,13 +1,19 @@
 <section id="main">
   <h1> Secrets </h1>
+
+  <div *ngIf="!user">
+    <a [routerLink]="['/login']">login</a>
+    <a [routerLink]="['/signup']">signup</a>
+  </div>
+
+  <div *ngIf="user">
+    <a [routerLink]="['/logout']">logout</a>
+  </div>
 </section>
-<div *ngIf="!user">
-  <a [routerLink]="['/login']">login</a>
-  <a [routerLink]="['/signup']">signup</a>
-</div>
+<hr>
+<hr>
+<div id="router-outlet">
+  <h2>Router outlet</h2>
 
-<div *ngIf="user">
-  <a [routerLink]="['/logout']">logout</a>
+  <router-outlet></router-outlet>
 </div>
-
-<router-outlet></router-outlet>
