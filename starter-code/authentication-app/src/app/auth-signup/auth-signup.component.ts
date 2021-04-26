@@ -24,14 +24,16 @@ export class AuthSignupComponent implements OnInit {
   ngOnInit() {
   }
 
-  signup(){
-    console.log(this.formInfo);
+  signup() {
+    // this.router.navigate([''])
     this.session.signup(this.formInfo)
       .subscribe(
-        (user)=>this.successCb(user),
-        (err)=>this.errorCb(err)
+        (user) =>{
+          this.successCb(user)
+          this.router.navigate(['']);
+        },
+        (err) => this.errorCb(err)
       );
-    this.router.navigate(['private']);
   }
 
   errorCb(err) {

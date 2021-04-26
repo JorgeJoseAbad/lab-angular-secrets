@@ -1,4 +1,4 @@
-<form>
+<!--<form>
   <h2> Signup </h2>
   <label> Username </label>
   <input type="text" [(ngModel)]="formInfo.username" name="username"/>
@@ -13,4 +13,24 @@
   <input type="password" [(ngModel)]="formInfo.secret" name="secret"/>
 
   <button (click)="signup()"> Signup </button>
+</form>-->
+
+<a [routerLink]="['/login']"> login </a>
+
+<form *ngIf="!user">
+  <h2> Login or Signup </h2>
+  <label> Username </label>
+  <input type="text" [(ngModel)]="formInfo.username" name="username"/>
+  <br>
+  <label> Password </label>
+  <input type="password" [(ngModel)]="formInfo.password" name="password"/>
+  <!-- <input type="text" [(ngModel)]="formInfo.password" name="password"/> -->
+  <br>
+  <label> Name </label>
+  <input type="text" [(ngModel)]="formInfo.name" name="name"/>
+  <br>
+  <label> Secret </label>
+  <input type="text" [(ngModel)]="formInfo.secret" name="secret"/>
+  <br>
+  <button (click)="signup()"> signup </button>
 </form>

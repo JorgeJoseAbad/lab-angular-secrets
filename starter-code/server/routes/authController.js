@@ -35,7 +35,7 @@ console.log("authController-signup2");
     });
 
     console.log(newUser);
-console.log("authController-signup3");
+    console.log("authController-signup3");
     newUser.save((err) => {
       if (err) { res.status(400).json({ message: "Something went wrong" }); }
       else {
@@ -49,6 +49,7 @@ console.log("authController-signup3");
 });
 
 authController.post("/login", (req, res, next) => {
+  console.log(req.body.password);
   passport.authenticate("local", (err, user, info) => {
     if (err) { return res.status(401).json(err); }
     if (!user) { return res.status(401).json(info); }
@@ -61,16 +62,19 @@ authController.post("/login", (req, res, next) => {
 });
 
 authController.post("/logout", (req, res) => {
+  console.log("in logout");
   req.logout();
   res.status(200).json({ message: "Success" });
 });
 
 authController.get("/loggedin", (req, res) => {
+  console.log("in authController-loggedin");
   if (req.isAuthenticated()) { return res.status(200).json(req.user); }
   return res.status(403).json({ message: "Unauthorized" });
 });
 
 authController.get("/private", (req, res) => {
+  console.log("auth-privatedata");
   if (req.isAuthenticated()) { return res.json({ message: req.user.secret }); }
   return res.status(403).json({ message: "Unauthorized" });
 });

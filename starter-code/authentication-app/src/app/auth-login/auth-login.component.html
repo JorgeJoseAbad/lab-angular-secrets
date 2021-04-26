@@ -1,0 +1,36 @@
+<!--<form>
+  <h2>Login</h2>
+  <label>Username</label>
+  <input type="text" [(ngModel)]="formInfo.username" name="username"/>
+  <br>
+  <label>password</label>
+  <input type="password" [(ngModel)]="formInfo.password" name="password"/>
+  <br>
+<button (click)="login()"> Login </button>
+</form>-->
+
+<div *ngIf="user">
+  <h2> You are now logged in as {{ user.username }}!! </h2>
+  <p> Here's the user object </p>
+  <pre> {{ user | json }} </pre>
+  <button (click)="logout()"> logout </button>
+</div>
+<div *ngIf="!user">
+  <h2> You are NOTlogged  </h2>
+  <a [routerLink]="['/signup']"> signup </a>
+</div>
+<p class="error"> {{ error }} </p>
+
+<form *ngIf="!user">
+  <h2> Login or Signup </h2>
+  <label> Username </label>
+  <input type="text" [(ngModel)]="formInfo.username" name="username"/>
+  <br>
+  <label> Password </label>
+  <input type="password" [(ngModel)]="formInfo.password" name="password"/>
+  <!-- <input type="text" [(ngModel)]="formInfo.password" name="password"/> -->
+  <br>
+  <button (click)="login()"> login </button>
+</form>
+View
+<a [routerLink]="['/private']">private</a>

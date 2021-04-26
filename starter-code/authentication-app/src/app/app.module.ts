@@ -12,10 +12,10 @@ import { MyPrivatePageComponent } from './my-private-page/my-private-page.compon
 import {Routes,RouterModule} from '@angular/router';
 
 const routes:Routes=[
-
-  {path: `signup`, component: AuthSignupComponent},
-  {path: `login`, component: AuthLoginComponent},
-  {path: `private`, component: MyPrivatePageComponent}
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {path: 'signup', component: AuthSignupComponent},
+  {path: 'login', component: AuthLoginComponent},
+  {path: 'private', component: MyPrivatePageComponent}
 ]
 
 @NgModule({

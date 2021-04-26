@@ -1,12 +1,12 @@
 <section id="main">
   <h1> Secrets </h1>
 </section>
-<div *ngIf=!user>
+<div *ngIf="!user">
   <a [routerLink]="['/login']">login</a>
   <a [routerLink]="['/signup']">signup</a>
 </div>
 
-<div *ngIf=user>
+<div *ngIf="user">
   <a [routerLink]="['/logout']">logout</a>
 </div>
 

@@ -20,12 +20,13 @@ export class SessionService {
     }
 
   login(user){
+    debugger;
     return this.http.post(`${this.BASE_URL}/login`,user)
       .map(res=>res.json())
       .catch(this.handleError);
   }
 
-  islogged(){
+  isLoggedIn(){
     return this.http.get(`${this.BASE_URL}/loggedin`)
       .map(res=>res.json())
       .catch(this.handleError)
@@ -41,9 +42,9 @@ export class SessionService {
     return Observable.throw(e.json().message);
   }
 
-  /*getPrivateData(){
+  getPrivateData(){
     return this.http.get(`${this.BASE_URL}/private`)
       .map(res=>res.json())
       .catch(this.handleError)
-  }*/
+  }
 }
